@@ -1,6 +1,8 @@
 package com.developr.me_commars.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developr.me_commars.R;
+import com.developr.me_commars.activitys.ProductDetaile;
 import com.developr.me_commars.databinding.ItemProudctBinding;
 import com.developr.me_commars.model.Product;
 import com.squareup.picasso.Picasso;
@@ -36,12 +39,26 @@ public class ProudctAdapter extends RecyclerView.Adapter<ProudctAdapter.ProudctV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProudctViewHoldre holder, int position) {
+    public void onBindViewHolder(@NonNull ProudctViewHoldre holder, @SuppressLint("RecyclerView") int position) {
         Product product= products.get(position);
 
         Picasso.get().load(product.getImage()).into(holder.binding.image);
         holder.binding.levels.setText(product.getName());
         holder.binding.levels.setText("BDT "+product.getPrice());
+        holder.binding.allitem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(context, ProductDetaile.class);
+               intent.putExtra("name",products.get(position).getName());
+               intent.putExtra("image",products.get(position).getImage());
+               intent.putExtra("id",products.get(position).getId());
+               intent.putExtra("prize",products.get(position).getPrice());
+
+
+                context.startActivity(intent);
+            }
+        });
 
 
     }
