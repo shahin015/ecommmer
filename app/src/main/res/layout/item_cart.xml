@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:id="@+id/layoutsitem"
       android:weightSum="5"
         >
 
@@ -31,6 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/name"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="product name "
                 android:textColor="@color/black"
                 android:padding="2dp"

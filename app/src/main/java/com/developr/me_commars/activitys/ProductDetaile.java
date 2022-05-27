@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,7 +20,10 @@ import com.android.volley.toolbox.Volley;
 import com.developr.me_commars.R;
 
 import com.developr.me_commars.databinding.ActivityProductDetaileBinding;
+import com.developr.me_commars.model.Product;
 import com.developr.me_commars.utils.Constants;
+import com.hishd.tinycart.model.Cart;
+import com.hishd.tinycart.util.TinyCartHelper;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -28,6 +32,7 @@ import org.json.JSONObject;
 public class ProductDetaile extends AppCompatActivity {
 
     ActivityProductDetaileBinding binding;
+    Product currentpordct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,16 @@ public class ProductDetaile extends AppCompatActivity {
 
         getProudct(id);
 
+        Cart cart = TinyCartHelper.getCart();
         binding.Descritption.setText(name);
+
+        binding.addtoCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cart.addItem(currentpordct,1);
+
+            }
+        });
 
     }
 
@@ -87,8 +101,21 @@ public class ProductDetaile extends AppCompatActivity {
                         String description=proudct.getString("description");
                         binding.Descritption.setText(Html.fromHtml(description));
 
+                        String name=proudct.getString("name");
+                        String image=proudct.getString("image");
+                        String status=proudct.getString("status");
+                        double prize=proudct.getDouble("price");
+                        double discpont=proudct.getDouble("price_discount");
+                        int stock=proudct.getInt("stock");
+                        // String brief=object.getString("brief");
+                        int id =proudct.getInt("id");
+                        currentpordct=new Product(name,Constants.PRODUCTS_IMAGE_URL+image,status,prize,discpont,stock,id);
+
+
 
                     }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

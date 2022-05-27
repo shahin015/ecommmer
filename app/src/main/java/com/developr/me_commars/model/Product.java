@@ -1,9 +1,23 @@
 package com.developr.me_commars.model;
 
-public class Product {
+import com.hishd.tinycart.model.Item;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+public class Product implements Item, Serializable {
     private String name,image,status;
     private  double price,discount;
     private int storck,id;
+    private  int quanty;
+
+    public int getQuanty() {
+        return quanty;
+    }
+
+    public void setQuanty(int quanty) {
+        this.quanty = quanty;
+    }
 
     public Product(String name, String image, String status, double price, double discount, int storck, int id) {
         this.name = name;
@@ -69,5 +83,15 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public BigDecimal getItemPrice() {
+        return new BigDecimal(price);
+    }
+
+    @Override
+    public String getItemName() {
+        return name;
     }
 }

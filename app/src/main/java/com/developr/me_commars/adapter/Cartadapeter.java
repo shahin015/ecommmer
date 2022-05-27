@@ -1,6 +1,9 @@
 package com.developr.me_commars.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.developr.me_commars.R;
 import com.developr.me_commars.databinding.ItemCartBinding;
+import com.developr.me_commars.databinding.QuntatiDailogBinding;
 import com.developr.me_commars.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -35,13 +39,52 @@ public class Cartadapeter extends RecyclerView.Adapter<Cartadapeter.CartViewHole
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHoleder holder, int position) {
+    public void onBindViewHolder(@NonNull CartViewHoleder holder, @SuppressLint("RecyclerView") int position) {
 
 
         Picasso.get().load(products.get(position).getImage()).into(holder.binding.cartImage);
         holder.binding.name.setText(Html.fromHtml(products.get(position).getName()));
         holder.binding.prize.setText("BDT: "+products.get(position).getPrice());
 
+        holder.binding.cuntaty.setText("items"+products.get(position).getQuanty());
+        holder.binding.layoutsitem.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View view) {
+
+                QuntatiDailogBinding quntatiDailogBinding=QuntatiDailogBinding.inflate(LayoutInflater.from(context));
+                AlertDialog alertDialog=new AlertDialog.Builder(context)
+                        .setView(quntatiDailogBinding.getRoot())
+
+                        .create();
+                quntatiDailogBinding.productName.setText(products.get(position).getName());
+                quntatiDailogBinding.productStock.setText(""+products.get(position).getStorck());
+                quntatiDailogBinding.quantity.setText(String.valueOf(products.get(position).getQuanty()));
+                int stocl= Integer.parseInt(""+products.get(position).getStorck());
+
+                quntatiDailogBinding.plusBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }); quntatiDailogBinding.minusBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                quntatiDailogBinding.saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
+                alertDialog.show();
+
+
+            }
+        });
 
 
 
@@ -59,6 +102,7 @@ public class Cartadapeter extends RecyclerView.Adapter<Cartadapeter.CartViewHole
         public CartViewHoleder(@NonNull View itemView) {
             super(itemView);
             binding=ItemCartBinding.bind(itemView);
+
 
         }
     }
