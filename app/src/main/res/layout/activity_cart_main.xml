@@ -31,13 +31,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Textvie"
+            android:text="Subtotal"
             android:textColor="@color/black"
             android:padding="2dp"
             android:layout_margin="4dp"
             android:textSize="18sp"
             android:gravity="right"
-            android:id="@+id/subtotoal"
+
             android:textStyle="bold"
 
             />
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="with out taxt"
+            android:text="(without taxt)"
             android:textColor="#0DD321"
             android:padding="2dp"
             android:layout_margin="4dp"
@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="BDtT"
+            android:id="@+id/subtotoal"
             android:textColor="#0DD321"
             android:padding="2dp"
             android:layout_margin="4dp"
@@ -76,13 +77,12 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:id="@+id/checkout"
-        android:text="Continue"
-        android:textAllCaps="false"
-
         android:layout_alignParentBottom="true"
-        ></Button>
+        android:text="Continue"
+
+        android:textAllCaps="false"></Button>
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,9 @@ import com.developr.me_commars.R;
 import com.developr.me_commars.databinding.ItemCartBinding;
 import com.developr.me_commars.databinding.QuntatiDailogBinding;
 import com.developr.me_commars.model.Product;
+import com.hishd.tinycart.model.Cart;
+import com.hishd.tinycart.model.Item;
+import com.hishd.tinycart.util.TinyCartHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,10 +28,19 @@ public class Cartadapeter extends RecyclerView.Adapter<Cartadapeter.CartViewHole
 
     Context context;
     ArrayList<Product>products;
+    Cartlesenaer cartlesenaer;
+    Cart cart ;
 
-    public Cartadapeter(Context context, ArrayList<Product> products) {
+
+    public interface Cartlesenaer{
+        public void onQuntaychange();
+    }
+
+    public Cartadapeter(Context context, ArrayList<Product> products, Cartlesenaer cartlesenaer) {
         this.context = context;
         this.products = products;
+        this.cartlesenaer=cartlesenaer;
+        cart = TinyCartHelper.getCart();
     }
 
     @NonNull
@@ -41,6 +54,7 @@ public class Cartadapeter extends RecyclerView.Adapter<Cartadapeter.CartViewHole
     @Override
     public void onBindViewHolder(@NonNull CartViewHoleder holder, @SuppressLint("RecyclerView") int position) {
 
+        Product product = products.get(position);
 
         Picasso.get().load(products.get(position).getImage()).into(holder.binding.cartImage);
         holder.binding.name.setText(Html.fromHtml(products.get(position).getName()));
@@ -65,17 +79,51 @@ public class Cartadapeter extends RecyclerView.Adapter<Cartadapeter.CartViewHole
                 quntatiDailogBinding.plusBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        int qunaty=products.get(position).getQuanty();
+                        qunaty++;
+                        if (qunaty>product.getStorck()){
+                            Toast.makeText(context, "Max stock available: "+product.getStorck(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }else {
+                            product.setQuanty(qunaty);
+                            quntatiDailogBinding.quantity.setText(String.valueOf(qunaty));
+                            notifyDataSetChanged();
+                            cart.updateItem(product,product.getQuanty());
+                            cartlesenaer.onQuntaychange();
+
+
+                        }
+
+
+
 
                     }
                 }); quntatiDailogBinding.minusBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        int qunaty=products.get(position).getQuanty();
+                        if (qunaty>1){
+                            qunaty--;
+                            product.setQuanty(qunaty);
+                            quntatiDailogBinding.quantity.setText(String.valueOf(qunaty));
+                            notifyDataSetChanged();
+                            cart.updateItem(product,product.getQuanty());
+                            cartlesenaer.onQuntaychange();
+
+                        }
+
+
 
                     }
                 });
                 quntatiDailogBinding.saveBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        alertDialog.dismiss();
+                        notifyDataSetChanged();
+                        cart.updateItem(product,product.getQuanty());
+                        cartlesenaer.onQuntaychange();
+
 
                     }
                 });

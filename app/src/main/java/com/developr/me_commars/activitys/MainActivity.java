@@ -3,6 +3,7 @@ package com.developr.me_commars.activitys;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.developr.me_commars.databinding.ActivityMainBinding;
 import com.developr.me_commars.model.Catogory;
 import com.developr.me_commars.model.Product;
 import com.developr.me_commars.utils.Constants;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem;
 import org.json.JSONArray;
@@ -42,6 +44,29 @@ public class MainActivity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
 
+    binding.searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+        @Override
+        public void onSearchStateChanged(boolean enabled) {
+
+        }
+
+        @Override
+        public void onSearchConfirmed(CharSequence text) {
+
+
+            Intent intent=new Intent(MainActivity.this, SearchActivity.class);
+            intent.putExtra("query",text.toString());
+            startActivity(intent);
+
+
+        }
+
+        @Override
+        public void onButtonClicked(int buttonCode) {
+
+        }
+    });
+
 
 
 
@@ -49,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         intProudcts();
         intSlider();
         getCatarogory();
+
+
 
 
 

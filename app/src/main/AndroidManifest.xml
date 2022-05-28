@@ -13,16 +13,30 @@
         android:theme="@style/Theme.MEcommars"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activitys.CategoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MEcommarss"/>
+        <activity
+            android:name=".activitys.SearchActivity"
+            android:theme="@style/Theme.MEcommarss"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.PaymentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MEcommarss" />
+        <activity
+            android:name=".activitys.Checout"
+            android:exported="false"
+            android:theme="@style/Theme.MEcommarss" />
+        <activity
             android:name=".activitys.CartMainActivity"
             android:exported="false"
-            android:theme="@style/Theme.MEcommarss"
             android:label="Shopping Cart"
-            />
+            android:theme="@style/Theme.MEcommarss" />
         <activity
             android:name=".activitys.ProductDetaile"
             android:exported="false"
-            android:theme="@style/Theme.MEcommarss"
-            />
+            android:theme="@style/Theme.MEcommarss" />
         <activity
             android:name=".activitys.MainActivity"
             android:exported="true">
@@ -32,6 +46,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

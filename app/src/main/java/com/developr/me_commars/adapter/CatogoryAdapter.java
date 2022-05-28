@@ -1,6 +1,7 @@
 package com.developr.me_commars.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developr.me_commars.R;
+import com.developr.me_commars.activitys.CategoryActivity;
 import com.developr.me_commars.databinding.ItemCatagorysBinding;
 import com.developr.me_commars.model.Catogory;
 import com.squareup.picasso.Picasso;
@@ -47,6 +49,17 @@ public class CatogoryAdapter extends RecyclerView.Adapter<CatogoryAdapter.Catogo
 
         Picasso.get().load(catogory.getIcon()).into(holder.binding.image);
         holder.binding.image.setBackgroundColor(Color.parseColor(catogory.getColor()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, CategoryActivity.class);
+                intent.putExtra("catId",catogory.getId());
+                intent.putExtra("categoryName",catogory.getName());
+                context.startActivity(intent);
+
+
+            }
+        });
 
 
     }

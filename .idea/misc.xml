@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/drawable/edittext_bg.xml" value="0.147" />
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_cart_main.xml" value="0.1453804347826087" />
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_category.xml" value="0.2" />
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_checout.xml" value="0.2" />
         <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_payment.xml" value="0.13697916666666668" />
         <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_product_detaile.xml" value="0.2" />
+        <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/activity_search.xml" value="0.13697916666666668" />
         <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/item_catagorys.xml" value="0.41285537700865266" />
         <entry key="..\:/Users/Shahain/AndroidStudioProjects/MEcommars/app/src/main/res/layout/item_proudct.xml" value="0.25" />
         <entry key="..\:/androiud project/app/src/main/res/font/roboto_bold.xml" value="0.11018518518518519" />

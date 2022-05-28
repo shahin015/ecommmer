@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.developr.me_commars.adapter.Cartadapeter;
 import com.developr.me_commars.databinding.ActivityCartMainBinding;
@@ -23,13 +25,13 @@ public class CartMainActivity extends AppCompatActivity {
     Cartadapeter cartadapeter;
     ArrayList<Product>products;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= ActivityCartMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         products=new ArrayList<>();
-
         Cart cart = TinyCartHelper.getCart();
 
         cart.getAllItemsWithQty();
@@ -40,17 +42,31 @@ public class CartMainActivity extends AppCompatActivity {
             products.add(product);
         }
 
-        cartadapeter=new Cartadapeter(this,products);
+        cartadapeter=new Cartadapeter(this, products, new Cartadapeter.Cartlesenaer() {
+            @Override
+            public void onQuntaychange() {
+                binding.subtotoal.setText(String.format("BDT %.2f",cart.getTotalPrice()));
+
+            }
+        });
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
 
         DividerItemDecoration itemDecoration=new DividerItemDecoration(this,linearLayoutManager.getOrientation());
         binding.cartRecylerview.setLayoutManager(linearLayoutManager);
         binding.cartRecylerview.addItemDecoration(itemDecoration);
         binding.cartRecylerview.setAdapter(cartadapeter);
+        binding.subtotoal.setText(String.format("BDT %.2f",cart.getTotalPrice()));
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        binding.checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(CartMainActivity.this,Checout.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
